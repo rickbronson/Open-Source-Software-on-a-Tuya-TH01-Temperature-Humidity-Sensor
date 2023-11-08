@@ -40,7 +40,6 @@ Steps for install on Debian 12.2:
 sudo usermod -a -G dialout $USER
 sudo apt install gcc-arm-none-eabi mosquitto mosquitto-clients git make python3-hid python3-serial python3-tqdm
 sudo mosquitto_passwd -c /etc/mosquitto/passwd <user> #make user and passwd for mosquitto for testing
-git clone https://github.com/openshwprojects/OpenBK7231T_App
 
 sudo bash -c "cat << EOF >> /etc/mosquitto/conf.d/default.conf
 allow_anonymous false
@@ -57,9 +56,9 @@ sudo systemctl restart mosquitto
 git clone https://github.com/OpenBekenIOT/hid_download_py
 ```
 
-  Go to https://github.com/openshwprojects/OpenBK7231T_App/releases and download the latests release for "BK7231N 	UART Flash".  NOTE: Don't get the one for BK7231T
+Go to https://github.com/openshwprojects/OpenBK7231T_App/releases and download the latests release for "BK7231N 	UART Flash".  NOTE: Don't get the one for BK7231T
 
-  This step is optional and only if you want to build the source code:
+This step is optional and only if you want to build the source code:
 
 ```
 git clone --recursive https://github.com/openshwprojects/OpenBK7231T; cd OpenBK7231T/apps; git clone https://github.com/openshwprojects/OpenBK7231T_App
@@ -72,7 +71,7 @@ git clone --recursive https://github.com/openshwprojects/OpenBK7231T; cd OpenBK7
 python3 hid_download_py/uartprogram OpenBK7231N_QIO_1.17.301.bin -u -d /dev/ttyUSB0 -w -s 0x0 -b 460800
 ```
 
-  Sometimes it takes a few times before you get it to program.
+Sometimes it takes a few times before you get it to program.
 	
   Once programmed, it will start an Access Point called "OpenBK7231N_????????". Connect to it and then, with a browser, go to 192.168.4.1 and setup WiFi so it connects to your router.  Log into your router to figure out what IP address it got (in the examples below, it's connected to my router at 192.168.2.3).	
 
@@ -104,9 +103,9 @@ to get temp (obTH01 is the "Client Topic"):
 mosquitto_sub -h localhost -t "obTH01/1/get" -u <user> -P <passwd>
 ```
 
-  Then press the button on the board (not the switch tied to CBS3) for a very short time, the LED should flash, and you should see a value come over on the above command.
+Then press the button on the board (not the switch tied to CBS3) for a very short time, the LED should flash, and you should see a value come over on the above command.
 
-  This command will add a timestamp to the one above:
+This command will add a timestamp to the one above:
 
 ```
 mosquitto_sub -v -h localhost -t "obTH01/1/get" -u <user> -P <passwd> | xargs -d$'\n' -L1 bash -c 'date "+%Y-%m-%d %T.%3N $0"'
