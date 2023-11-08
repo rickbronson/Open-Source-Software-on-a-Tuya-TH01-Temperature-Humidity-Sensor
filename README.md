@@ -104,7 +104,7 @@ to get temp (obTH01 is the "Client Topic"):
 mosquitto_sub -h localhost -t "obTH01/1/get" -u <user> -P <passwd>
 ```
 
-  Then press the button on the board for a very short time, the LED should flash, and you should see a value come over on the above command.
+  Then press the button on the board (not the switch tied to CBS3) for a very short time, the LED should flash, and you should see a value come over on the above command.
 
   This command will add a timestamp to the one above:
 
