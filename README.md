@@ -85,6 +85,16 @@ Go to http://192.168.2.3/cfg_generic and setup:
 
 Flags: 33, 10, 37 turned ON, and "Uptime seconds required to mark boot as ok:" from 5 to 3.
 
+Setting up pin configuration:
+
+Use the GPIO Mapper feature to find the pin config, got to:
+
+```
+http://192.168.2.3/app?
+```
+
+and select the "GPIO Finder" tab.  In this tab you can see when a input pin changes or change the output pin to high or low.
+
 Testing MQTT:
 
 I setup up the MQTT config page (on http://192.168.2.3/cfg_mqtt) like this:
