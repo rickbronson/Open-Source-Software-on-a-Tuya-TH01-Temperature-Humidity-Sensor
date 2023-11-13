@@ -61,7 +61,14 @@ Go to https://github.com/openshwprojects/OpenBK7231T_App/releases and download t
 This step is optional and only if you want to build the source code:
 
 ```
-git clone --recursive https://github.com/openshwprojects/OpenBK7231T; cd OpenBK7231T/apps; git clone https://github.com/openshwprojects/OpenBK7231T_App
+git clone https://github.com/OpenBekenIOT/hid_download_py
+git clone --recursive https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231n.git
+git clone --recursive https://github.com/openshwprojects/OpenBK7231N
+cd OpenBK7231N/apps
+git clone https://github.com/openshwprojects/OpenBK7231T_App
+mv OpenBK7231T_App OpenBK7231N_App
+cd ../..
+sed -i -e "s/^python /python3 /g" OpenBK7231N/platforms/bk7231n/bk7231n_os/build.sh
 ```
 
  - Hook up for board using the "hookup" photo above

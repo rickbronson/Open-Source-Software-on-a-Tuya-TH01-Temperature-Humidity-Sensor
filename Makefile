@@ -1,7 +1,7 @@
 all: read
 
 get:
-	git clone --recursive https://github.com/openshwprojects/OpenBK7231T; cd OpenBK7231T/apps; git clone https://github.com/openshwprojects/OpenBK7231T_App
+	git clone --recursive https://github.com/openshwprojects/OpenBK7231T; cd OpenBK7231N/apps; git clone https://github.com/openshwprojects/OpenBK7231T_App
 
 read:
 	python3 hid_download_py/uartprogram firmware.bin -r # -l 1220608
@@ -17,10 +17,11 @@ flash:
 #	python3 hid_download_py/uartprogram OpenBK7231T/apps/OpenBK7231T_App/output/1.0.0/OpenBK7231T_App_1.0.0.bin --unprotect -d /dev/ttyUSB0 -w --startaddr 0x0
 
 build:
-	cd OpenBK7231T; ./build_app.sh apps/OpenBK7231T_App OpenBK7231T_App 1.0.0
+	cd OpenBK7231N; ./build_app.sh apps/OpenBK7231N_App OpenBK7231N_App 1.0.0
+#	cd OpenBK7231N; sh build_app.sh apps/tuya_demo_template tuya_demo_template 1.0.0
 
 clean:
-	cd OpenBK7231T; ./build_app.sh apps/OpenBK7231T_App OpenBK7231T_App 1.0.0 clean
+	cd OpenBK7231N; ./build_app.sh apps/OpenBK7231N_App OpenBK7231N_App 1.0.0 clean
 
 github-init:
 	gh repo create 'Open Source Software on a Tuya TH01 Temperature Humidity Sensor' --public
