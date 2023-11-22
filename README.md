@@ -61,7 +61,6 @@ Go to https://github.com/openshwprojects/OpenBK7231T_App/releases and download t
 This step is optional and only if you want to build the source code:
 
 ```
-git clone https://github.com/OpenBekenIOT/hid_download_py
 git clone --recursive https://github.com/tuya/tuya-iotos-embeded-sdk-wifi-ble-bk7231n.git
 git clone --recursive https://github.com/openshwprojects/OpenBK7231N
 cd OpenBK7231N/apps

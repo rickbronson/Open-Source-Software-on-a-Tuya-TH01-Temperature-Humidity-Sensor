@@ -1,3 +1,9 @@
+OUT_DIR= $(shell	if [ -d "$(HOME)/in" ] ; then \
+		echo -n $(HOME)/in; else echo -n /tmp;	fi)
+PROJ=OpenBK7231N
+VERS=6
+
+
 all: read
 
 get:
@@ -17,7 +23,7 @@ flash:
 #	python3 hid_download_py/uartprogram OpenBK7231T/apps/OpenBK7231T_App/output/1.0.0/OpenBK7231T_App_1.0.0.bin --unprotect -d /dev/ttyUSB0 -w --startaddr 0x0
 
 build:
-	cd OpenBK7231N; ./build_app.sh apps/OpenBK7231N_App OpenBK7231N_App 1.0.0
+	cd OpenBK7231N; ./build_app.sh apps/OpenBK7231N_App OpenBK7231N_App 1.17.308-$(VERS)
 #	cd OpenBK7231N; sh build_app.sh apps/tuya_demo_template tuya_demo_template 1.0.0
 
 clean:
@@ -38,3 +44,12 @@ github-update:
 	git commit -a -m 'update README'
 	git push -u origin master
 
+diff:
+#	rm -f $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch; cd OpenBK7231N/apps/OpenBK7231N_App; for file in `find -L . -name "*.~1~"` ; do root_name=`echo $$file | sed -e "s|\(.*\).~1~|\1|"`;  echo "* diffing $$root_name{.~1~,}"; diff -uNr $$root_name.~1~ $$root_name >> $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch; ls > /dev/null; done
+	cd OpenBK7231N/apps/OpenBK7231N_App; git diff > $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch
+	diff -uNr autoexec.bat.~1~ autoexec.bat >> $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch; ls > /dev/null
+	zip $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch.zip $(OUT_DIR)/$(PROJ)-$@-$(VERS).patch
+	@echo -e "cd $(PROJ).orig; cat $(OUT_DIR)/$(PROJ)-$(VERS).patch | patch -b --version-control=numbered -p1 --dry-run"
+
+patch:
+	cd OpenBK7231N/apps/OpenBK7231N_App$ cat ~/boards/tuya-temp-humidity/patch1 | patch --dry-run -p1
